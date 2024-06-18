@@ -41,3 +41,64 @@ export const addSkaterQuery = async (
     console.log("error.code: ", error.code, "\nerror.message: ", error.message);
   }
 };
+
+export const checkIfSkaterExistsQuery = async (email) => {
+  try {
+    const query = {
+      text: "SELECT * FROM skaters WHERE email = $1",
+      values: [email],
+    };
+
+    const response = await pool.query(query);
+
+    if (response.rowCount > 0) {
+      return response.rows;
+    } else {
+      return new Error("No se encontraron skaters");
+    }
+  } catch (error) {
+    console.log("error.code: ", error.code, "\nerror.message: ", error.message);
+  }
+};
+
+export const updateSkaterQuery = async (
+  email,
+  name,
+  password,
+  years,
+  speciality
+) => {
+  try {
+    const query = {
+      text: `UPDATE skaters SET nombre = $1, password = $2, anos_experiencia = $3, especialidad = $4 WHERE email = $5 RETURNING *`,
+      values: [name, password, Number(years), speciality, email],
+    };
+    const response = await pool.query(query);
+
+    if (response.rowCount > 0) {
+      return response.rows;
+    } else {
+      return new Error("No se registraron skaters");
+    }
+  } catch (error) {
+    console.log("error.code: ", error.code, "\nerror.message: ", error.message);
+  }
+};
+
+export const deleteSkaterQuery = async (email) => {
+  try {
+    const query = {
+      text: `DELETE FROM skaters WHERE email = $1 RETURNING *`,
+      values: [email],
+    };
+    const response = await pool.query(query);
+
+    if (response.rowCount > 0) {
+      return response.rows;
+    } else {
+      return new Error("No se encontraron skaters");
+    }
+  } catch (error) {
+    console.log("error.code: ", error.code, "\nerror.message: ", error.message);
+  }
+};

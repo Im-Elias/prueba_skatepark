@@ -11,6 +11,7 @@
   "license": "MIT",
   "description": "",
   "dependencies": {
+    "cookie-parser": "^1.4.6",
     "express": "^4.19.2",
     "express-fileupload": "^1.5.0",
     "express-handlebars": "^7.1.2",

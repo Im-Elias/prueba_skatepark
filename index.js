@@ -2,6 +2,7 @@ import express from "express";
 import expressFileUpload from "express-fileupload";
 import { engine } from "express-handlebars";
 import router from "./routes/router.js";
+import cookieParser from "cookie-parser";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -9,6 +10,7 @@ const PORT = process.env.PORT || 3000;
 //middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 // static filesç
 app.use(express.static("public"));
