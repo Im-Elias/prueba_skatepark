@@ -102,3 +102,21 @@ export const deleteSkaterQuery = async (email) => {
     console.log("error.code: ", error.code, "\nerror.message: ", error.message);
   }
 };
+
+export const setSkaterState = async (id, estado) => {
+  try {
+    const query = {
+      text: `UPDATE skaters SET estado = $1 WHERE id = $2 RETURNING *`,
+      values: [estado, id],
+    };
+    const response = await pool.query(query);
+
+    if (response.rowCount > 0) {
+      return result.rows;
+    } else {
+      return new Error("Skater wasn't updated");
+    }
+  } catch (error) {
+    console.log("error.code: ", error.code, "\nerror.message: ", error.message);
+  }
+};
