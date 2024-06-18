@@ -1,30 +1,27 @@
 const checkboxes = document.querySelectorAll('input[type="checkbox"]');
 
+const fetchSetSkater = async (id, estado) => {
+  const url = `/setState/${id}/${estado}`;
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Error fetching data: ${response.status}`);
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+};
+
 checkboxes.forEach((checkbox) => {
   checkbox.addEventListener("change", function () {
-    const checkbox = this;
-    //get id of the row
-    const row = checkbox.closest("tr");
-    const id = row.dataset.id;
-    //get the state of the checkbox
-    const estado = checkbox.checked;
+    const id = checkbox.value;
+    const estado = this.checked;
 
-    console.log(checkbox, row, id, estado);
+    fetchSetSkater(id, estado);
 
-    fetch(`/api/skater/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify({ estado }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    alert("El estado de la casilla ha sido cambiado");
+    window.location.href = "/";
   });
 });

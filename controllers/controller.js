@@ -5,6 +5,7 @@ import {
   checkIfSkaterExistsQuery,
   updateSkaterQuery,
   deleteSkaterQuery,
+  setSkaterStateQuery,
 } from "../models/queries.js";
 import jwt from "jsonwebtoken";
 import fs from "fs";
@@ -112,6 +113,18 @@ export const updateOrDeleteSkater = async (req, res) => {
       await updateSkaterQuery(email, name, password, years, speciality);
       return res.status(200).redirect("/profile");
     }
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};
+
+export const setSkaterState = async (req, res) => {
+  try {
+    const { id, state } = req.params;
+    await setSkaterStateQuery(id, state);
+    return res
+      .status(200)
+      .json({ message: "Skater state updated successfully!" });
   } catch (error) {
     res.status(500).send(error.message);
   }

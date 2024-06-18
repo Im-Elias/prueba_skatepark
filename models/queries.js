@@ -103,7 +103,7 @@ export const deleteSkaterQuery = async (email) => {
   }
 };
 
-export const setSkaterState = async (id, estado) => {
+export const setSkaterStateQuery = async (id, estado) => {
   try {
     const query = {
       text: `UPDATE skaters SET estado = $1 WHERE id = $2 RETURNING *`,
@@ -112,7 +112,7 @@ export const setSkaterState = async (id, estado) => {
     const response = await pool.query(query);
 
     if (response.rowCount > 0) {
-      return result.rows;
+      return response.rows;
     } else {
       return new Error("Skater wasn't updated");
     }

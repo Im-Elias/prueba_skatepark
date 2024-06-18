@@ -21,11 +21,7 @@
           <td>{{this.nombre}}</td>
           <td>{{this.anos_experiencia}}</td>
           <td>{{this.especialidad}}</td>
-          {{#if this.estado}}
-            <td><input type="checkbox" checked /></td>
-          {{else}}
-            <td><input type="checkbox" unchecked /></td>
-          {{/if}}
+            <td><input type="checkbox"{{#if this.estado}} checked {{/if}} value="{{this.id}}" /></td>
         </tr>
       {{/each}}
     </tbody>

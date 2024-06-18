@@ -8,6 +8,7 @@ import {
   logIn,
   updateOrDeleteSkater,
   admin,
+  setSkaterState,
 } from "../controllers/controller.js";
 
 const router = Router();
@@ -27,5 +28,7 @@ router.post("/login", logIn);
 router.post("/profile/", updateOrDeleteSkater);
 
 router.get("/admin", admin);
+
+router.get("/setState/:id/:state", setSkaterState);
 
 export default router;
