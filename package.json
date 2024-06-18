@@ -1,0 +1,21 @@
+{
+  "name": "prueba-skate-park",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch --env-file=.env index.js"
+  },
+  "keywords": [],
+  "author": "Josué Gallardo",
+  "license": "MIT",
+  "description": "",
+  "dependencies": {
+    "express": "^4.19.2",
+    "express-fileupload": "^1.5.0",
+    "express-handlebars": "^7.1.2",
+    "jsonwebtoken": "^9.0.2",
+    "pg": "^8.12.0",
+    "uuid": "^10.0.0"
+  }
+}
